@@ -14,7 +14,7 @@ models=(
 for model in ${models[@]}
 do
   commands+=( \
-    "python -m lcb_runner.runner.main --model $model --scenario codegeneration --evaluate --release_version release_v5" \
+    "python -m lcb_runner.runner.main --model $model --scenario codegeneration --evaluate --release_version release_v4" \
   )
 done
 
