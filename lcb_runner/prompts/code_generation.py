@@ -23,6 +23,13 @@ class PromptConstants:
         f"<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user"
     )
 
+    SYSTEM_MESSAGE_RL = f"""<|im_start|>system
+A conversation between User and Assistant.
+The user asks a question, and the Assistant solves it.
+The assistant first thinks about the reasoning process in the mind and then provides the user with the answer.
+The reasoning process and answer are enclosed within <think> </think> and <answer> </answer> tags, respectively, i.e., <think> reasoning process here </think> <answer> answer here </answer>.<|im_end|>\n<|im_start|>user"""
+            
+            
     SYSTEM_MESSAGE_DEEPSEEK_R1 = (
         "<｜begin▁of▁sentence｜>A conversation between User and Assistant. "
         "The user asks a question, and the Assistant solves it. "
@@ -302,6 +309,11 @@ def format_prompt_generation(
 
     if LanguageModelStyle == LMStyle.CodeQwenInstruct:
         prompt = f"{PromptConstants.SYSTEM_MESSAGE_CODEQWEN}\n\n"
+        prompt += f"{get_codeqwen_question_template_answer(question)}"
+        return prompt
+    
+    if LanguageModelStyle == LMStyle.AceCoderV2RL:
+        prompt = f"{PromptConstants.SYSTEM_MESSAGE_RL}\n\n"
         prompt += f"{get_codeqwen_question_template_answer(question)}"
         return prompt
 

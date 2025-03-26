@@ -16,18 +16,18 @@ def main():
         help="the model",
     )
     parser.add_argument(
-        "--base",
-        type=bool,
-        default=True,
-        help="set to True if its qwen base model, else we assume instruct model",
+        "--model_type",
+        type=str,
+        default="rl",
+        help="one of rl, instruct, and base",
     )
     # Use parse_known_args to separate initializer args from the rest
     custom_args, remaining_args = parser.parse_known_args()
     
     model_name: str = custom_args.model
-    base_model = custom_args.base
+    model_type = custom_args.model_type
     
-    if not base_model:
+    if model_type == "instruct":
         model = LanguageModel(
             model_name,
             model_name.replace("/", "--"),
@@ -35,7 +35,7 @@ def main():
             datetime(2025, 3, 25),
             link=f"https://huggingface.co/{model_name}",
         )
-    else:
+    elif model_type == "base":
         model = LanguageModel(
             model_name,
             model_name.replace("/", "--"),
@@ -43,6 +43,16 @@ def main():
             datetime(2025, 3, 25),
             link=f"https://huggingface.co/{model_name}",
         )
+    elif model_type == "rl":
+        model = LanguageModel(
+            model_name,
+            model_name.replace("/", "--"),
+            LMStyle.AceCoderV2RL,
+            datetime(2025, 3, 25),
+            link=f"https://huggingface.co/{model_name}",
+        )
+    else:
+        raise Exception(f"unknown model type: {model_type}, currently only support rl, instruct and base")
         
     LanguageModelStore[model.model_name] = model
 

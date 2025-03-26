@@ -24,6 +24,7 @@ class LMStyle(Enum):
     CodeLLaMaInstruct = "CodeLLaMaInstruct"
     StarCoderInstruct = "StarCoderInstruct"
     CodeQwenInstruct = "CodeQwenInstruct"
+    AceCoderV2RL = "AceCoderV2RL"
     QwQ = "QwQ"
 
     LLaMa3 = "LLaMa3"

@@ -12,16 +12,16 @@ models=(
 
 
 # For each model in the models array, specify the corresponding --base value.
-base_flags=(
-    "true"
+model_types=(
+    "rl"
 )
 
 # Build the command list.
 for i in "${!models[@]}"; do
   model="${models[$i]}"
-  base="${base_flags[$i]}"
+  model_type="${model_types[$i]}"
   commands+=( \
-    "python myEvaluate/rl_evaluate.py --model $model --scenario codegeneration --evaluate --release_version release_v4 --base $base" \
+    "python myEvaluate/rl_evaluate.py --model $model --scenario codegeneration --evaluate --release_version release_v4 --model_type $model_type" \
   )
 done
 
