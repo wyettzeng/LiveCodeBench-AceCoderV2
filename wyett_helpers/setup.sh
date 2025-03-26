@@ -1,7 +1,4 @@
 #!/bin/bash
-pip install uv
-
-uv venv --python 3.11
-source .venv/bin/activate
-
-uv pip install -e .
+conda create --name livecodebench python=3.11
+conda activate livecodebench
+pip install -e .

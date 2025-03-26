@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Available GPUs
-cuda_devices=(7)
+cuda_devices=(5)
 
 # We’ll store all commands in an array
 declare -a commands=()
@@ -11,10 +11,17 @@ models=(
 )
 
 
-for model in ${models[@]}
-do
+# For each model in the models array, specify the corresponding --base value.
+base_flags=(
+    "true"
+)
+
+# Build the command list.
+for i in "${!models[@]}"; do
+  model="${models[$i]}"
+  base="${base_flags[$i]}"
   commands+=( \
-    "python -m lcb_runner.runner.main --model $model --scenario codegeneration --evaluate --release_version release_v4" \
+    "python myEvaluate/rl_evaluate.py --model $model --scenario codegeneration --evaluate --release_version release_v4 --base $base" \
   )
 done
 
