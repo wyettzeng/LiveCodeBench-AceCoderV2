@@ -1,18 +1,24 @@
 #!/bin/bash
 
 # Available GPUs
-cuda_devices=(5)
+cuda_devices=(4 5 6 7)
 
 # We’ll store all commands in an array
 declare -a commands=()
 
 models=(
     "CodeDPO/qwen25-coder-inst-7b-reinforce-plus_v2_mini_processed_r1"
+    "CodeDPO/qwen25-coder-base-7b-reinforce-plus_v2_mini_processed_r1"
+    "CodeDPO/qwen25-coder-base-7b-reinforce-plus_v2_mini_processed_r1_grpo_kl"
+    "CodeDPO/qwen25-coder-inst-7b-reinforce-plus_v2_mini_processed_r1_cold_start"
 )
 
 
 # For each model in the models array, specify the corresponding --base value.
 model_types=(
+    "rl"
+    "rl"
+    "rl"
     "rl"
 )
 
